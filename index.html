@@ -9,15 +9,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Go Quiz">
   <meta name="description" content="Тренажёр Go: теория и разбор кода по пройденным темам.">
-  
-  
-  
-  <link rel="stylesheet" href="./styles.css">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
   <link rel="apple-touch-icon" href="./icons/icon-180.png">
+  <link rel="stylesheet" href="./styles.css">
   <title>Go Quiz — тренажёр языка Go</title>
-  
+  <script defer src="./app.js"></script>
 </head>
 <body>
   <div class="shell">
@@ -26,7 +23,7 @@
         <img src="./icons/icon.svg" alt="" width="43" height="43">
         <span><strong>Go Quiz</strong><small>Твой тренажёр Go</small></span>
       </div>
-      <span class="top-chip">v1.0 · офлайн</span>
+      <span class="top-chip">v1.1 · офлайн</span>
     </header>
     <main id="app" class="main" aria-live="off"><div class="loading"><div class="loader"></div>Загружаем вопросы…</div></main>
     <nav class="bottom-nav" id="bottom-nav" aria-label="Основная навигация">
@@ -36,6 +33,5 @@
     </nav>
   </div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script defer src="./app.js"></script>
 </body>
 </html>
