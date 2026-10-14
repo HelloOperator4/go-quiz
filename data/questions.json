@@ -1,0 +1,1558 @@
+{
+  "version": 1,
+  "source": "Курс Go: выполнены задачи 1–270. Темы блока 271–275 исключены.",
+  "topics": [
+    {
+      "id": "basics",
+      "name": "Основы и типы",
+      "icon": "∑"
+    },
+    {
+      "id": "control",
+      "name": "Условия и циклы",
+      "icon": "↻"
+    },
+    {
+      "id": "slices",
+      "name": "Массивы и срезы",
+      "icon": "▤"
+    },
+    {
+      "id": "strings",
+      "name": "Строки и map",
+      "icon": "Aa"
+    },
+    {
+      "id": "functions",
+      "name": "Функции и методы",
+      "icon": "ƒ"
+    },
+    {
+      "id": "structs",
+      "name": "Структуры и интерфейсы",
+      "icon": "◇"
+    },
+    {
+      "id": "errors",
+      "name": "Ошибки и дженерики",
+      "icon": "!"
+    },
+    {
+      "id": "testing",
+      "name": "Пакеты и тесты",
+      "icon": "✓"
+    },
+    {
+      "id": "io",
+      "name": "Ввод, вывод и файлы",
+      "icon": "⇄"
+    },
+    {
+      "id": "json",
+      "name": "JSON и конфигурации",
+      "icon": "{}"
+    }
+  ],
+  "questions": [
+    {
+      "id": "basics-01",
+      "topic": "basics",
+      "kind": "theory",
+      "question": "Какое нулевое значение получает переменная типа bool?",
+      "code": null,
+      "options": [
+        "false",
+        "true",
+        "nil",
+        "0"
+      ],
+      "answer": 0,
+      "explanation": "Для bool нулевое значение — false; для числовых типов — 0, для строк — пустая строка."
+    },
+    {
+      "id": "basics-02",
+      "topic": "basics",
+      "kind": "theory",
+      "question": "Где разрешена короткая форма объявления x := 5?",
+      "code": null,
+      "options": [
+        "В любом месте файла",
+        "Только внутри функций",
+        "Только на уровне пакета",
+        "Только внутри цикла for"
+      ],
+      "answer": 1,
+      "explanation": "Короткое объявление := разрешено внутри функций. На уровне пакета используют var или const."
+    },
+    {
+      "id": "basics-03",
+      "topic": "basics",
+      "kind": "theory",
+      "question": "Как в Go присвоить переменной типа float64 значение переменной int?",
+      "code": null,
+      "options": [
+        "Автоматически, без преобразования",
+        "Через float64(x)",
+        "Через x.float64()",
+        "Через приведение &x"
+      ],
+      "answer": 1,
+      "explanation": "Go не выполняет такое числовое преобразование неявно: требуется явное float64(x)."
+    },
+    {
+      "id": "basics-04",
+      "topic": "basics",
+      "kind": "theory",
+      "question": "Что верно о константе, объявленной через const?",
+      "code": null,
+      "options": [
+        "Её можно изменить после объявления",
+        "Её значение нельзя переприсвоить",
+        "Она всегда имеет тип string",
+        "Она существует только в цикле"
+      ],
+      "answer": 1,
+      "explanation": "Значение константы устанавливается при компиляции и не может быть изменено присваиванием."
+    },
+    {
+      "id": "basics-05",
+      "topic": "basics",
+      "kind": "theory",
+      "question": "Какая пара типов в Go является различной?",
+      "code": null,
+      "options": [
+        "int и int",
+        "string и string",
+        "byte и uint8",
+        "int и int64"
+      ],
+      "answer": 3,
+      "explanation": "int и int64 — разные типы. byte — псевдоним uint8, поэтому отдельного типа byte нет."
+    },
+    {
+      "id": "basics-06",
+      "topic": "basics",
+      "kind": "code",
+      "question": "Что напечатает фрагмент?",
+      "code": "var count int\nfmt.Println(count)",
+      "options": [
+        "0",
+        "1",
+        "nil",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "Для переменной int без явного начального значения используется 0."
+    },
+    {
+      "id": "basics-07",
+      "topic": "basics",
+      "kind": "code",
+      "question": "Что выведет этот код?",
+      "code": "a := 7\nb := 2\nfmt.Println(a / b)",
+      "options": [
+        "3",
+        "3.5",
+        "4",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "Оба операнда имеют целочисленный тип: при делении 7 на 2 дробная часть отбрасывается."
+    },
+    {
+      "id": "basics-08",
+      "topic": "basics",
+      "kind": "code",
+      "question": "Что напечатает программа?",
+      "code": "x := 5\nif true {\n    x := 9\n    _ = x\n}\nfmt.Println(x)",
+      "options": [
+        "5",
+        "9",
+        "0",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "x внутри блока if — новая переменная. Внешняя x остаётся равной 5."
+    },
+    {
+      "id": "basics-09",
+      "topic": "basics",
+      "kind": "code",
+      "question": "Чему равно значение переменной s?",
+      "code": "var s string\nfmt.Printf(\"%q\", s)",
+      "options": [
+        "\"0\"",
+        "\" \"",
+        "\"\"",
+        "nil"
+      ],
+      "answer": 2,
+      "explanation": "Нулевое значение string — пустая строка, а не nil и не строка с символом 0."
+    },
+    {
+      "id": "basics-10",
+      "topic": "basics",
+      "kind": "code",
+      "question": "Какой результат будет выведен?",
+      "code": "a := 5\na += 3\nb := a - 5\nfmt.Println(a, b)",
+      "options": [
+        "8 3",
+        "8 2",
+        "5 3",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "Операция += увеличивает a до 8, затем b получает a - 5, то есть 3."
+    },
+    {
+      "id": "control-01",
+      "topic": "control",
+      "kind": "theory",
+      "question": "Как ведёт себя оператор continue внутри цикла?",
+      "code": null,
+      "options": [
+        "Завершает всю функцию",
+        "Пропускает остаток текущей итерации",
+        "Полностью завершает цикл",
+        "Запускает цикл заново с i=0"
+      ],
+      "answer": 1,
+      "explanation": "continue переходит к следующей итерации ближайшего цикла, не завершая весь цикл."
+    },
+    {
+      "id": "control-02",
+      "topic": "control",
+      "kind": "theory",
+      "question": "Что делает break без метки внутри цикла for?",
+      "code": null,
+      "options": [
+        "Прерывает ближайший цикл",
+        "Пропускает одну итерацию",
+        "Завершает программу",
+        "Возвращает значение функции"
+      ],
+      "answer": 0,
+      "explanation": "break прерывает выполнение ближайшей конструкции for, switch или select; здесь это цикл for."
+    },
+    {
+      "id": "control-03",
+      "topic": "control",
+      "kind": "theory",
+      "question": "Какие значения по умолчанию возвращает range по срезу?",
+      "code": null,
+      "options": [
+        "Ключ и значение map",
+        "Индекс и элемент",
+        "Срез и вместимость",
+        "Первый и последний элементы"
+      ],
+      "answer": 1,
+      "explanation": "При двух переменных range по срезу даёт индекс элемента и значение элемента."
+    },
+    {
+      "id": "control-04",
+      "topic": "control",
+      "kind": "theory",
+      "question": "Как ведёт себя switch в Go после выполнения подходящего case без fallthrough?",
+      "code": null,
+      "options": [
+        "Выполняет все следующие case",
+        "Завершается после данного case",
+        "Всегда переходит в default",
+        "Нуждается в обязательном break"
+      ],
+      "answer": 1,
+      "explanation": "В Go обычный case не проваливается в следующий case автоматически. Явный break обычно не нужен."
+    },
+    {
+      "id": "control-05",
+      "topic": "control",
+      "kind": "theory",
+      "question": "Какая конструкция служит циклом while в Go?",
+      "code": null,
+      "options": [
+        "while condition {}",
+        "repeat until {}",
+        "for condition {}",
+        "loop(condition) {}"
+      ],
+      "answer": 2,
+      "explanation": "Отдельного ключевого слова while нет. Для цикла с одним условием используют for condition { ... }."
+    },
+    {
+      "id": "control-06",
+      "topic": "control",
+      "kind": "code",
+      "question": "Что будет выведено?",
+      "code": "sum := 0\nfor i := 0; i < 5; i++ {\n    if i%2 == 0 { sum += i }\n}\nfmt.Println(sum)",
+      "options": [
+        "4",
+        "6",
+        "10",
+        "12"
+      ],
+      "answer": 1,
+      "explanation": "В сумму попадают чётные значения i: 0, 2 и 4. Результат равен 6."
+    },
+    {
+      "id": "control-07",
+      "topic": "control",
+      "kind": "code",
+      "question": "Что напечатает программа?",
+      "code": "count := 0\nfor i := 0; i < 6; i++ {\n    if i == 3 { break }\n    count++\n}\nfmt.Println(count)",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": 1,
+      "explanation": "Цикл выполняется с i=0,1,2,3. На i=3 срабатывает break, поэтому count равен 3."
+    },
+    {
+      "id": "control-08",
+      "topic": "control",
+      "kind": "code",
+      "question": "Что напечатает этот код?",
+      "code": "for i := 0; i < 3; i++ {\n    if i == 1 { continue }\n    fmt.Print(i, \" \")\n}",
+      "options": [
+        "0 1 2",
+        "1 2 3",
+        "0 2",
+        "1 3"
+      ],
+      "answer": 2,
+      "explanation": "continue пропускает вывод при i==1, остальные значения 0 и 2 выводятся."
+    },
+    {
+      "id": "control-09",
+      "topic": "control",
+      "kind": "code",
+      "question": "Что будет выведено?",
+      "code": "x := 2\nswitch x {\ncase 1: fmt.Print(\"one\")\ncase 2: fmt.Print(\"two\")\ndefault: fmt.Print(\"other\")\n}",
+      "options": [
+        "one",
+        "two",
+        "other",
+        "oneother"
+      ],
+      "answer": 1,
+      "explanation": "Значение x равно 2, поэтому выполняется ветка case 2. Следующие ветки автоматически не выполняются."
+    },
+    {
+      "id": "control-10",
+      "topic": "control",
+      "kind": "code",
+      "question": "Каков результат?",
+      "code": "values := []int{3, 4, 5}\ncount := 0\nfor _, n := range values {\n    if n > 3 { count++ }\n}\nfmt.Println(count)",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "6"
+      ],
+      "answer": 0,
+      "explanation": "range проходит по элементам 3, 4, 5; условие n>3 истинно для 4 и 5 — два раза."
+    },
+    {
+      "id": "slices-01",
+      "topic": "slices",
+      "kind": "theory",
+      "question": "Чем принципиально отличается присваивание массива от присваивания среза?",
+      "code": null,
+      "options": [
+        "Оба всегда копируют все элементы",
+        "Массив копирует элементы, срез — дескриптор",
+        "Срез копирует элементы, массив — указатель",
+        "Оба присваивания запрещены"
+      ],
+      "answer": 1,
+      "explanation": "Присваивание массива копирует значения элементов; присваивание среза копирует его дескриптор, сохраняя доступ к общему базовому массиву."
+    },
+    {
+      "id": "slices-02",
+      "topic": "slices",
+      "kind": "theory",
+      "question": "Что означает cap(s) для среза?",
+      "code": null,
+      "options": [
+        "Число элементов, доступных по текущим индексам",
+        "Размер типа элемента в байтах",
+        "Доступную вместимость от начала среза в базовом массиве",
+        "Количество ненулевых элементов"
+      ],
+      "answer": 2,
+      "explanation": "cap показывает, сколько элементов может охватывать срез при расширении от его начала без смены базового массива."
+    },
+    {
+      "id": "slices-03",
+      "topic": "slices",
+      "kind": "theory",
+      "question": "Как соотносятся nil-срез и пустой срез []int{}?",
+      "code": null,
+      "options": [
+        "Оба обязательно nil",
+        "Оба имеют len=0, но nil-состояние различается",
+        "Пустой срез имеет len=1",
+        "nil-срез нельзя передавать в append"
+      ],
+      "answer": 1,
+      "explanation": "У обоих длина 0, но сравнение с nil истинно лишь для nil-среза; append допустим в обоих случаях."
+    },
+    {
+      "id": "slices-04",
+      "topic": "slices",
+      "kind": "theory",
+      "question": "Сколько элементов копирует copy(dst, src)?",
+      "code": null,
+      "options": [
+        "Всегда len(src)",
+        "Всегда cap(dst)",
+        "Минимум из len(dst) и len(src)",
+        "Всегда len(dst)+len(src)"
+      ],
+      "answer": 2,
+      "explanation": "copy возвращает число скопированных элементов, равное минимуму из длин исходного и целевого срезов."
+    },
+    {
+      "id": "slices-05",
+      "topic": "slices",
+      "kind": "theory",
+      "question": "Когда append обязательно выделяет другой базовый массив?",
+      "code": null,
+      "options": [
+        "Всегда",
+        "Если новой длине не хватает текущей вместимости",
+        "Если элемент равен нулю",
+        "Если срез получен через make"
+      ],
+      "answer": 1,
+      "explanation": "Если новая длина превышает cap исходного среза, расширение в том же базовом массиве невозможно."
+    },
+    {
+      "id": "slices-06",
+      "topic": "slices",
+      "kind": "code",
+      "question": "Что выведет код?",
+      "code": "a := [3]int{1, 2, 3}\nb := a\nb[0] = 9\nfmt.Println(a[0])",
+      "options": [
+        "1",
+        "9",
+        "0",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "Массив b — отдельная копия массива a. Изменение b[0] не затрагивает a[0]."
+    },
+    {
+      "id": "slices-07",
+      "topic": "slices",
+      "kind": "code",
+      "question": "Что напечатает программа?",
+      "code": "a := []int{1, 2, 3}\nb := a[1:]\nb[0] = 8\nfmt.Println(a[1])",
+      "options": [
+        "2",
+        "8",
+        "3",
+        "Ошибка выполнения"
+      ],
+      "answer": 1,
+      "explanation": "b[0] соответствует a[1] в том же базовом массиве. После присваивания a[1] становится 8."
+    },
+    {
+      "id": "slices-08",
+      "topic": "slices",
+      "kind": "code",
+      "question": "Чему равны len и cap?",
+      "code": "s := make([]int, 2, 5)\ns = append(s, 7)\nfmt.Println(len(s), cap(s))",
+      "options": [
+        "2 5",
+        "3 3",
+        "3 5",
+        "5 5"
+      ],
+      "answer": 2,
+      "explanation": "После append длина увеличивается с 2 до 3, а исходной вместимости 5 хватает."
+    },
+    {
+      "id": "slices-09",
+      "topic": "slices",
+      "kind": "code",
+      "question": "Что будет выведено?",
+      "code": "src := []int{4, 5, 6}\ndst := make([]int, 2)\nn := copy(dst, src)\nfmt.Println(n, dst)",
+      "options": [
+        "2 [4 5]",
+        "3 [4 5 6]",
+        "2 [4 5 6]",
+        "3 [4 5]"
+      ],
+      "answer": 0,
+      "explanation": "В целевом срезе два элемента, поэтому copy переносит только 4 и 5 и возвращает 2."
+    },
+    {
+      "id": "slices-10",
+      "topic": "slices",
+      "kind": "code",
+      "question": "Что выведет программа?",
+      "code": "s := []int{1, 2, 3, 4}\nresult := s[:0]\nfor _, n := range s {\n    if n%2 == 0 { result = append(result, n) }\n}\nfmt.Println(result)",
+      "options": [
+        "[1 3]",
+        "[]",
+        "[2 4]",
+        "[1 2 3 4]"
+      ],
+      "answer": 2,
+      "explanation": "s[:0] создаёт срез нулевой длины, и append добавляет в него только чётные значения 2 и 4."
+    },
+    {
+      "id": "strings-01",
+      "topic": "strings",
+      "kind": "theory",
+      "question": "Какой факт о строках Go верен?",
+      "code": null,
+      "options": [
+        "Можно изменить s[0] присваиванием",
+        "Строки неизменяемы",
+        "len считает количество rune",
+        "Строка всегда содержит только ASCII"
+      ],
+      "answer": 1,
+      "explanation": "Строка в Go неизменяема: её байты нельзя менять через индексное присваивание."
+    },
+    {
+      "id": "strings-02",
+      "topic": "strings",
+      "kind": "theory",
+      "question": "Что считает len(s) для строки s?",
+      "code": null,
+      "options": [
+        "Количество символов Unicode",
+        "Количество слов",
+        "Количество байтов",
+        "Количество строк"
+      ],
+      "answer": 2,
+      "explanation": "len(string) возвращает количество байтов в UTF-8-представлении, а не число Unicode-символов."
+    },
+    {
+      "id": "strings-03",
+      "topic": "strings",
+      "kind": "theory",
+      "question": "Что возвращает чтение отсутствующего ключа map[string]int в форме v, ok := m[key]?",
+      "code": null,
+      "options": [
+        "Панику",
+        "0 и false",
+        "nil и true",
+        "1 и false"
+      ],
+      "answer": 1,
+      "explanation": "При отсутствии ключа возвращаются нулевое значение типа элемента (0) и признак отсутствия false."
+    },
+    {
+      "id": "strings-04",
+      "topic": "strings",
+      "kind": "theory",
+      "question": "Какое утверждение о порядке обхода map через range верно?",
+      "code": null,
+      "options": [
+        "Всегда сортировка ключей",
+        "Всегда порядок вставки",
+        "Порядок не гарантируется",
+        "Всегда обратный порядок"
+      ],
+      "answer": 2,
+      "explanation": "Спецификация не гарантирует порядок итерации по map. Если нужна сортировка, ключи упорядочивают отдельно."
+    },
+    {
+      "id": "strings-05",
+      "topic": "strings",
+      "kind": "theory",
+      "question": "Что делает strings.Fields?",
+      "code": null,
+      "options": [
+        "Делит только по одному пробелу",
+        "Удаляет все гласные",
+        "Разбивает текст на поля по пробельным символам",
+        "Разбивает по запятым"
+      ],
+      "answer": 2,
+      "explanation": "Fields выделяет непустые слова, используя последовательности пробельных символов как разделители."
+    },
+    {
+      "id": "strings-06",
+      "topic": "strings",
+      "kind": "code",
+      "question": "Что будет выведено?",
+      "code": "fmt.Println(len(\"я\"))",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 1,
+      "explanation": "Русская буква «я» кодируется двумя байтами UTF-8, поэтому len(\"я\") равен 2."
+    },
+    {
+      "id": "strings-07",
+      "topic": "strings",
+      "kind": "code",
+      "question": "Каков результат?",
+      "code": "scores := map[string]int{\"Go\": 10}\nv, ok := scores[\"Python\"]\nfmt.Println(v, ok)",
+      "options": [
+        "0 true",
+        "nil false",
+        "0 false",
+        "Ошибка выполнения"
+      ],
+      "answer": 2,
+      "explanation": "Ключа Python нет, поэтому значение типа int равно 0, а ok — false."
+    },
+    {
+      "id": "strings-08",
+      "topic": "strings",
+      "kind": "code",
+      "question": "Что выведет программа?",
+      "code": "parts := strings.Fields(\"  go   is fun  \")\nfmt.Println(len(parts))",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "answer": 1,
+      "explanation": "Fields вернёт три строки: go, is, fun. Лишние пробелы не превращаются в элементы."
+    },
+    {
+      "id": "strings-09",
+      "topic": "strings",
+      "kind": "code",
+      "question": "Какое значение будет выведено?",
+      "code": "count := 0\nfor range \"Go✓\" { count++ }\nfmt.Println(count)",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 2,
+      "explanation": "range проходит по Unicode-кодовым точкам: G, o и ✓ — всего три итерации."
+    },
+    {
+      "id": "strings-10",
+      "topic": "strings",
+      "kind": "code",
+      "question": "Что напечатает программа?",
+      "code": "s := []string{\"a\", \"b\", \"c\"}\nfmt.Println(strings.Join(s, \"-\"))",
+      "options": [
+        "a-b-c",
+        "abc",
+        "a b c",
+        "[a b c]"
+      ],
+      "answer": 0,
+      "explanation": "strings.Join вставляет разделитель «-» между тремя элементами среза."
+    },
+    {
+      "id": "functions-01",
+      "topic": "functions",
+      "kind": "theory",
+      "question": "Что происходит с аргументом типа int при обычной передаче в функцию?",
+      "code": null,
+      "options": [
+        "Передаётся копия значения",
+        "Всегда передаётся ссылка",
+        "Функция автоматически меняет исходную переменную",
+        "Компилятор запрещает изменения параметра"
+      ],
+      "answer": 0,
+      "explanation": "Параметр типа int получает копию значения аргумента. Изменение параметра не изменяет исходную переменную."
+    },
+    {
+      "id": "functions-02",
+      "topic": "functions",
+      "kind": "theory",
+      "question": "Можно ли функции Go вернуть два результата?",
+      "code": null,
+      "options": [
+        "Нет",
+        "Да, указав несколько возвращаемых типов",
+        "Только через map",
+        "Только через глобальные переменные"
+      ],
+      "answer": 1,
+      "explanation": "Функции Go могут возвращать несколько значений, например результат и error."
+    },
+    {
+      "id": "functions-03",
+      "topic": "functions",
+      "kind": "theory",
+      "question": "Что означает параметр nums ...int?",
+      "code": null,
+      "options": [
+        "Нельзя передавать больше одного int",
+        "Функция принимает переменное число int",
+        "Это указатель на int",
+        "Это обязательный массив фиксированной длины"
+      ],
+      "answer": 1,
+      "explanation": "Синтаксис ...int означает вариадический параметр: внутри функции nums доступен как []int."
+    },
+    {
+      "id": "functions-04",
+      "topic": "functions",
+      "kind": "theory",
+      "question": "Что отличает метод от обычной функции?",
+      "code": null,
+      "options": [
+        "Метод обязательно возвращает error",
+        "У метода есть receiver (получатель)",
+        "Метод нельзя вызывать",
+        "Метод всегда изменяет структуру"
+      ],
+      "answer": 1,
+      "explanation": "Метод объявляется с получателем перед именем: func (u User) Name() string { ... }."
+    },
+    {
+      "id": "functions-05",
+      "topic": "functions",
+      "kind": "theory",
+      "question": "Что верно о рекурсивной функции?",
+      "code": null,
+      "options": [
+        "Она вызывает саму себя",
+        "Она не может иметь параметров",
+        "Она всегда выполняется бесконечно",
+        "Она доступна только внутри метода"
+      ],
+      "answer": 0,
+      "explanation": "Рекурсия — вызов функции из самой себя. Для остановки нужен базовый случай."
+    },
+    {
+      "id": "functions-06",
+      "topic": "functions",
+      "kind": "code",
+      "question": "Что выведет программа?",
+      "code": "func update(n int) int { return n + 3 }\n\nfunc main() {\n    x := 4\n    y := update(x)\n    fmt.Println(x, y)\n}",
+      "options": [
+        "7 7",
+        "4 7",
+        "4 4",
+        "7 4"
+      ],
+      "answer": 1,
+      "explanation": "update получает копию int. Исходная x остаётся 4, а возвращаемое значение равно 7."
+    },
+    {
+      "id": "functions-07",
+      "topic": "functions",
+      "kind": "code",
+      "question": "Какой результат?",
+      "code": "func total(nums ...int) (int, int) {\n    sum := 0\n    for _, n := range nums { sum += n }\n    return len(nums), sum\n}\nfmt.Println(total(1, 2, 3))",
+      "options": [
+        "3 6",
+        "6 3",
+        "6 6",
+        "3 3"
+      ],
+      "answer": 0,
+      "explanation": "Функция возвращает сумму 1+2+3=6 и количество аргументов 3. Сначала выводится длина, затем сумма."
+    },
+    {
+      "id": "functions-08",
+      "topic": "functions",
+      "kind": "code",
+      "question": "Что выведет программа?",
+      "code": "func calc(n int) int {\n    n *= 2\n    return n - 1\n}\nfmt.Println(calc(2))",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "Ошибка компиляции"
+      ],
+      "answer": 1,
+      "explanation": "В функцию передано значение 2; после умножения на 2 получаем 4, но функция возвращает n-1, то есть 3."
+    },
+    {
+      "id": "functions-09",
+      "topic": "functions",
+      "kind": "code",
+      "question": "Что будет выведено?",
+      "code": "type Counter struct { N int }\nfunc (c Counter) Add() { c.N += 3 }\n\nc := Counter{N: 5}\nc.Add()\nfmt.Println(c.N)",
+      "options": [
+        "8",
+        "5",
+        "0",
+        "Ошибка компиляции"
+      ],
+      "answer": 1,
+      "explanation": "Получатель метода — значение Counter, то есть копия. Внутри метода меняется копия, исходное поле остаётся 5."
+    },
+    {
+      "id": "functions-10",
+      "topic": "functions",
+      "kind": "code",
+      "question": "Какой результат?",
+      "code": "type Counter struct { N int }\nfunc (c *Counter) Add() { c.N += 3 }\n\nc := Counter{N: 5}\nc.Add()\nfmt.Println(c.N)",
+      "options": [
+        "2",
+        "3",
+        "5",
+        "8"
+      ],
+      "answer": 3,
+      "explanation": "Приёмник *Counter позволяет менять исходную структуру. К 5 прибавляется 3, получается 8."
+    },
+    {
+      "id": "structs-01",
+      "topic": "structs",
+      "kind": "theory",
+      "question": "Как пакет делает поле структуры доступным из другого пакета?",
+      "code": null,
+      "options": [
+        "Имя поля начинается с заглавной буквы",
+        "Поле объявлено через var",
+        "Имя поля начинается с подчёркивания",
+        "Поле имеет тип string"
+      ],
+      "answer": 0,
+      "explanation": "Экспортируемые идентификаторы в Go начинаются с заглавной буквы, например Name."
+    },
+    {
+      "id": "structs-02",
+      "topic": "structs",
+      "kind": "theory",
+      "question": "Как тип реализует интерфейс в Go?",
+      "code": null,
+      "options": [
+        "Пишет implements",
+        "Неявно, предоставляя требуемый набор методов",
+        "Только через наследование",
+        "Только через type assertion"
+      ],
+      "answer": 1,
+      "explanation": "Реализация интерфейса не объявляется отдельно: важно соответствие набору методов."
+    },
+    {
+      "id": "structs-03",
+      "topic": "structs",
+      "kind": "theory",
+      "question": "Какое условие необходимо, чтобы интерфейсное значение равнялось nil?",
+      "code": null,
+      "options": [
+        "Его динамическое значение равно 0",
+        "Его динамический тип и значение оба отсутствуют",
+        "В нём лежит nil-указатель",
+        "Его методы не экспортированы"
+      ],
+      "answer": 1,
+      "explanation": "Интерфейс равен nil, когда в нём нет ни динамического типа, ни динамического значения."
+    },
+    {
+      "id": "structs-04",
+      "topic": "structs",
+      "kind": "theory",
+      "question": "Что делает запись v, ok := x.(T) для интерфейса x?",
+      "code": null,
+      "options": [
+        "Задаёт значение по умолчанию",
+        "Проверяет утверждение типа без паники при неуспехе",
+        "Создаёт тип T",
+        "Вызывает метод T"
+      ],
+      "answer": 1,
+      "explanation": "Двухзначная форма утверждения типа сообщает признаком ok, удалось ли получить T, без паники при неудаче."
+    },
+    {
+      "id": "structs-05",
+      "topic": "structs",
+      "kind": "theory",
+      "question": "Если метод определён только для получателя *User, что верно про набор методов?",
+      "code": null,
+      "options": [
+        "Метод точно входит в методный набор User",
+        "Метод входит в методный набор *User",
+        "Метод не может участвовать в интерфейсах",
+        "Получатель *User запрещён"
+      ],
+      "answer": 1,
+      "explanation": "Методы с получателем *User входят в методный набор *User; одного такого метода недостаточно, чтобы значение User реализовало интерфейс."
+    },
+    {
+      "id": "structs-06",
+      "topic": "structs",
+      "kind": "code",
+      "question": "Что выведет фрагмент?",
+      "code": "type Person struct { Name string }\np := Person{Name: \"Ada\"}\nfmt.Println(p.Name)",
+      "options": [
+        "Ada",
+        "Go",
+        "Пустую строку",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "В поле Name записано Ada; обращение через p.Name возвращает это значение."
+    },
+    {
+      "id": "structs-07",
+      "topic": "structs",
+      "kind": "code",
+      "question": "Что выведет программа?",
+      "code": "type Speaker interface { Say() string }\ntype Greeter struct{}\nfunc (Greeter) Say() string { return \"Hi, Go\" }\n\nvar s Speaker = Greeter{}\nfmt.Println(s.Say())",
+      "options": [
+        "Hi, Go",
+        "Go",
+        "Hi",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "Тип Greeter имеет метод Say() string и поэтому неявно реализует интерфейс Speaker."
+    },
+    {
+      "id": "structs-08",
+      "topic": "structs",
+      "kind": "code",
+      "question": "Что будет выведено?",
+      "code": "type Item struct{}\nvar p *Item = nil\nvar i interface{} = p\nfmt.Println(i == nil)",
+      "options": [
+        "true",
+        "false",
+        "nil",
+        "Ошибка компиляции"
+      ],
+      "answer": 1,
+      "explanation": "Интерфейс содержит динамический тип *Item, даже если динамическое значение — nil-указатель. Поэтому i != nil."
+    },
+    {
+      "id": "structs-09",
+      "topic": "structs",
+      "kind": "code",
+      "question": "Что выведет код?",
+      "code": "var x interface{} = \"5\"\nv, ok := x.(int)\nfmt.Println(v, ok)",
+      "options": [
+        "5 true",
+        "0 false",
+        "0 true",
+        "Ошибка выполнения"
+      ],
+      "answer": 1,
+      "explanation": "Значение интерфейса хранит string, поэтому утверждение типа int не проходит. Двухзначная форма возвращает 0 и false."
+    },
+    {
+      "id": "structs-10",
+      "topic": "structs",
+      "kind": "code",
+      "question": "Что выведет программа?",
+      "code": "type Point struct { N int }\nfunc (p *Point) Move() { p.N += 2 }\n\np := &Point{N: 5}\np.Move()\nfmt.Println(p.N)",
+      "options": [
+        "5",
+        "7",
+        "0",
+        "Ошибка компиляции"
+      ],
+      "answer": 1,
+      "explanation": "Точечное обращение p.N получает поле структуры внутри указателя; метод с указательным получателем меняет поле с 5 на 7."
+    },
+    {
+      "id": "errors-01",
+      "topic": "errors",
+      "kind": "theory",
+      "question": "Какой тип обычно используют в Go для возвращения информации об ошибке?",
+      "code": null,
+      "options": [
+        "panic",
+        "error",
+        "bool вместо всех ошибок",
+        "exception"
+      ],
+      "answer": 1,
+      "explanation": "В Go ошибки обычно возвращаются как значения встроенного интерфейса error."
+    },
+    {
+      "id": "errors-02",
+      "topic": "errors",
+      "kind": "theory",
+      "question": "Какой спецификатор fmt.Errorf сохраняет обёрнутую ошибку для errors.Is?",
+      "code": null,
+      "options": [
+        "%d",
+        "%s",
+        "%w",
+        "%q"
+      ],
+      "answer": 2,
+      "explanation": "Спецификатор %w создаёт ошибку-обёртку с доступом к исходной причине через цепочку unwrap."
+    },
+    {
+      "id": "errors-03",
+      "topic": "errors",
+      "kind": "theory",
+      "question": "Что проверяет errors.Is(err, target)?",
+      "code": null,
+      "options": [
+        "Совпадает ли текст ошибок",
+        "Соответствует ли ошибка target с учётом цепочки обёрток и Is",
+        "Является ли err nil",
+        "Является ли target строкой"
+      ],
+      "answer": 1,
+      "explanation": "errors.Is проверяет совпадение ошибки с целью, проходя цепочку обёрток и учитывая определённое поведение Is."
+    },
+    {
+      "id": "errors-04",
+      "topic": "errors",
+      "kind": "theory",
+      "question": "Что означает ограничение comparable у параметра типа?",
+      "code": null,
+      "options": [
+        "Поддерживает арифметические операции",
+        "Поддерживает == и != для значений этого типа",
+        "Обязательно реализует String()",
+        "Обязательно является указателем"
+      ],
+      "answer": 1,
+      "explanation": "Ограничение comparable позволяет сравнивать значения == и !=; арифметические операторы оно не гарантирует."
+    },
+    {
+      "id": "errors-05",
+      "topic": "errors",
+      "kind": "theory",
+      "question": "Когда выполняется отложенный вызов defer внутри функции?",
+      "code": null,
+      "options": [
+        "Немедленно при встрече defer",
+        "Перед выходом из окружающей функции",
+        "Только если возникла ошибка",
+        "После завершения всей программы"
+      ],
+      "answer": 1,
+      "explanation": "defer регистрирует вызов, который исполняется перед возвратом из окружающей функции, включая путь с паникой."
+    },
+    {
+      "id": "errors-06",
+      "topic": "errors",
+      "kind": "code",
+      "question": "Что напечатает код?",
+      "code": "err := fmt.Errorf(\"read: %w\", io.EOF)\nfmt.Println(errors.Is(err, io.EOF))",
+      "options": [
+        "true",
+        "false",
+        "Панику",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "fmt.Errorf с %w оборачивает io.EOF, поэтому errors.Is находит исходную ошибку в цепочке."
+    },
+    {
+      "id": "errors-07",
+      "topic": "errors",
+      "kind": "code",
+      "question": "Что будет выведено?",
+      "code": "func show() {\n    fmt.Print(\"1 \")\n    defer fmt.Print(\"2 \")\n    fmt.Print(\"3 \")\n}\nshow()",
+      "options": [
+        "1 2 3",
+        "3 2 1",
+        "1 3 2",
+        "2 3 1"
+      ],
+      "answer": 2,
+      "explanation": "Печать 1 происходит сразу, defer печатает 2 при выходе из функции, но перед ним выполняется Print(3)."
+    },
+    {
+      "id": "errors-08",
+      "topic": "errors",
+      "kind": "code",
+      "question": "Каков результат вызова First?",
+      "code": "func First[T any](s []T) T { return s[0] }\nfmt.Println(First([]int{9, 8}))",
+      "options": [
+        "0",
+        "9",
+        "8",
+        "Ошибка компиляции"
+      ],
+      "answer": 1,
+      "explanation": "Функция с параметром типа T возвращает первый элемент переданного среза, то есть 9."
+    },
+    {
+      "id": "errors-09",
+      "topic": "errors",
+      "kind": "code",
+      "question": "Что напечатает программа?",
+      "code": "var err error\nfmt.Println(err == nil)",
+      "options": [
+        "true",
+        "false",
+        "nil",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "Переменная err содержит nil; сравнение err == nil истинно."
+    },
+    {
+      "id": "errors-10",
+      "topic": "errors",
+      "kind": "code",
+      "question": "Какой результат?",
+      "code": "func Add[T int | int64](a, b T) T { return a + b }\nfmt.Println(Add(1, 3))",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "Ошибка компиляции"
+      ],
+      "answer": 2,
+      "explanation": "Тип int подходит под ограничение int | int64. Сложение 1+3 возвращает 4."
+    },
+    {
+      "id": "testing-01",
+      "topic": "testing",
+      "kind": "theory",
+      "question": "Как в Go называется файл с тестами функций пакета?",
+      "code": null,
+      "options": [
+        "Имя с суффиксом _test.go",
+        "Обязательно test.go",
+        "Имя с суффиксом .spec",
+        "Только main.go"
+      ],
+      "answer": 0,
+      "explanation": "Тестовый файл Go имеет суффикс _test.go и содержит тестовые функции."
+    },
+    {
+      "id": "testing-02",
+      "topic": "testing",
+      "kind": "theory",
+      "question": "Как должна называться стандартная тестовая функция?",
+      "code": null,
+      "options": [
+        "testSomething(t *testing.T)",
+        "TestSomething(t *testing.T)",
+        "CheckSomething(t *testing.T)",
+        "RunSomething()"
+      ],
+      "answer": 1,
+      "explanation": "Тестовые функции имеют префикс Test и аргумент *testing.T; имя после Test должно быть допустимым идентификатором."
+    },
+    {
+      "id": "testing-03",
+      "topic": "testing",
+      "kind": "theory",
+      "question": "Что делает go.mod?",
+      "code": null,
+      "options": [
+        "Хранит результаты тестов",
+        "Определяет модуль и его зависимости",
+        "Всегда содержит исходный код main",
+        "Записывает только переменные окружения"
+      ],
+      "answer": 1,
+      "explanation": "go.mod указывает путь модуля, версию языка Go и сведения о зависимостях."
+    },
+    {
+      "id": "testing-04",
+      "topic": "testing",
+      "kind": "theory",
+      "question": "Чем отличается t.Fatal от t.Error?",
+      "code": null,
+      "options": [
+        "t.Fatal продолжает тест",
+        "t.Error немедленно останавливает тест",
+        "t.Fatal завершает текущий тест, t.Error позволяет продолжить",
+        "Они оба завершают всю программу"
+      ],
+      "answer": 2,
+      "explanation": "t.Fatal отмечает ошибку и прекращает выполнение текущего теста; t.Error регистрирует ошибку, но текущий тест продолжается."
+    },
+    {
+      "id": "testing-05",
+      "topic": "testing",
+      "kind": "theory",
+      "question": "Для чего полезны табличные тесты?",
+      "code": null,
+      "options": [
+        "Чтобы не писать проверки вообще",
+        "Чтобы прогонять одну логику на разных входах и ожиданиях",
+        "Чтобы заменить go.mod",
+        "Чтобы запускать тесты только один раз"
+      ],
+      "answer": 1,
+      "explanation": "Табличный тест использует набор кейсов, к каждому из которых применяется одна проверяемая логика."
+    },
+    {
+      "id": "testing-06",
+      "topic": "testing",
+      "kind": "code",
+      "question": "Что произойдёт, если тест запустить через go test?",
+      "code": "func sum(a, b int) int { return a + b }\nfunc TestSum(t *testing.T) {\n    if sum(2, 3) != 5 { t.Fatal(\"wrong sum\") }\n}",
+      "options": [
+        "Тест пройдёт",
+        "Тест завершится ошибкой из-за условия",
+        "Код не компилируется",
+        "Тест не будет найден"
+      ],
+      "answer": 0,
+      "explanation": "sum(2,3) возвращает 5, условие 5 != 5 ложно, поэтому t.Fatal не вызывается."
+    },
+    {
+      "id": "testing-07",
+      "topic": "testing",
+      "kind": "code",
+      "question": "Какое ожидаемое значение в этом тесте неверно?",
+      "code": "func sum(a,b int) int { return a+b }\ncases := []struct{a,b,want int}{\n    {1,1,2}, {2,3,6}, {0,4,4},\n}\nfor _, tc := range cases {\n    _ = sum(tc.a,tc.b) == tc.want\n}",
+      "options": [
+        "Для (1,1) ожидается 2",
+        "Для (2,3) ожидается 6",
+        "Для (0,4) ожидается 4",
+        "Все значения верны"
+      ],
+      "answer": 1,
+      "explanation": "Функция sum складывает аргументы: sum(2,3)=5, а не 6."
+    },
+    {
+      "id": "testing-08",
+      "topic": "testing",
+      "kind": "code",
+      "question": "Сколько подтестов создаст этот код?",
+      "code": "func TestModes(t *testing.T) {\n    for _, name := range []string{\"fast\", \"safe\", \"full\"} {\n        t.Run(name, func(t *testing.T) {})\n    }\n}",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": 2,
+      "explanation": "Цикл проходит по трём элементам, и t.Run вызывается ровно три раза."
+    },
+    {
+      "id": "testing-09",
+      "topic": "testing",
+      "kind": "code",
+      "question": "Что выведет пример вызова?",
+      "code": "func normalize(s string) string { return strings.ToLower(s) }\nfmt.Println(normalize(\"GO\"))",
+      "options": [
+        "Go",
+        "go",
+        "GO",
+        "Ошибка компиляции"
+      ],
+      "answer": 1,
+      "explanation": "strings.ToLower переводит латинские буквы в нижний регистр: получается go."
+    },
+    {
+      "id": "testing-10",
+      "topic": "testing",
+      "kind": "code",
+      "question": "Что верно для этого теста?",
+      "code": "func TestFlag(t *testing.T) {\n    t.Error(\"failed\")\n    fmt.Println(\"after\")\n}",
+      "options": [
+        "Он успешно завершается",
+        "Он отмечается проваленным, но строка after всё равно выполняется",
+        "Он не запускается из-за имени",
+        "Он завершает всё приложение паникой"
+      ],
+      "answer": 1,
+      "explanation": "t.Error регистрирует ошибку теста, но не останавливает выполнение: Println(\"after\") будет вызван."
+    },
+    {
+      "id": "io-01",
+      "topic": "io",
+      "kind": "theory",
+      "question": "Что описывает интерфейс io.Reader?",
+      "code": null,
+      "options": [
+        "Источник, из которого читают байты",
+        "Место, куда записывают байты",
+        "Конструктор файлов",
+        "JSON-документ"
+      ],
+      "answer": 0,
+      "explanation": "io.Reader задаёт метод Read(p []byte) (n int, err error): он предоставляет последовательность байтов для чтения."
+    },
+    {
+      "id": "io-02",
+      "topic": "io",
+      "kind": "theory",
+      "question": "Что делает os.Create при открытии существующего файла?",
+      "code": null,
+      "options": [
+        "Всегда сохраняет прежнее содержимое",
+        "Обрезает содержимое файла до нулевой длины",
+        "Открывает файл только на чтение",
+        "Создаёт только каталог"
+      ],
+      "answer": 1,
+      "explanation": "os.Create создаёт или открывает файл для записи и усекает его, если он уже существовал."
+    },
+    {
+      "id": "io-03",
+      "topic": "io",
+      "kind": "theory",
+      "question": "Что нужно сделать с bufio.Writer, чтобы гарантировать вывод буферизованных данных?",
+      "code": null,
+      "options": [
+        "Вызвать Flush и обработать ошибку",
+        "Вызвать ReadString",
+        "Увеличить буфер",
+        "Ничего — запись всегда немедленная"
+      ],
+      "answer": 0,
+      "explanation": "Данные могут оставаться в буфере. Flush пытается отправить накопленные байты в нижележащий Writer."
+    },
+    {
+      "id": "io-04",
+      "topic": "io",
+      "kind": "theory",
+      "question": "Что по умолчанию выдаёт bufio.Scanner при сканировании текста?",
+      "code": null,
+      "options": [
+        "Отдельные байты",
+        "Строки без символов перевода строки",
+        "Только числа",
+        "Готовые JSON-объекты"
+      ],
+      "answer": 1,
+      "explanation": "Scanner по умолчанию использует ScanLines: токены — строки без завершающего перевода строки."
+    },
+    {
+      "id": "io-05",
+      "topic": "io",
+      "kind": "theory",
+      "question": "Каков порядок аргументов у io.Copy?",
+      "code": null,
+      "options": [
+        "Сначала Reader, затем Writer",
+        "Сначала Writer, затем Reader",
+        "Сначала имя файла, затем путь",
+        "Только один Reader"
+      ],
+      "answer": 1,
+      "explanation": "Сигнатура io.Copy(dst Writer, src Reader) начинается с назначения (Writer), затем источника (Reader)."
+    },
+    {
+      "id": "io-06",
+      "topic": "io",
+      "kind": "code",
+      "question": "Что будет напечатано?",
+      "code": "r := strings.NewReader(\"Go!\")\ndata, _ := io.ReadAll(r)\nfmt.Println(len(data))",
+      "options": [
+        "2",
+        "3",
+        "4",
+        "Ошибка компиляции"
+      ],
+      "answer": 1,
+      "explanation": "io.ReadAll читает все три байта строки Go!; длина полученного []byte равна 3."
+    },
+    {
+      "id": "io-07",
+      "topic": "io",
+      "kind": "code",
+      "question": "Что выведет программа?",
+      "code": "s := bufio.NewScanner(strings.NewReader(\"a\\nb\\nc\"))\nn := 0\nfor s.Scan() { n++ }\nfmt.Println(n)",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "0"
+      ],
+      "answer": 0,
+      "explanation": "Scanner по умолчанию разбивает строку на строки: a, b и c — три токена, а не четыре."
+    },
+    {
+      "id": "io-08",
+      "topic": "io",
+      "kind": "code",
+      "question": "Что будет выведено?",
+      "code": "var b bytes.Buffer\nfmt.Fprintln(&b, \"Go\")\nfmt.Printf(\"%q\", b.String())",
+      "options": [
+        "Go",
+        "\"Go\\n\"",
+        "\\nGo",
+        "Пустая строка"
+      ],
+      "answer": 1,
+      "explanation": "fmt.Fprintln дописывает перевод строки после Go, поэтому буфер содержит \"Go\\n\"."
+    },
+    {
+      "id": "io-09",
+      "topic": "io",
+      "kind": "code",
+      "question": "Каков результат?",
+      "code": "var dst bytes.Buffer\nn, _ := io.Copy(&dst, strings.NewReader(\"abc\"))\nfmt.Println(n)",
+      "options": [
+        "0",
+        "3",
+        "4",
+        "Ошибка компиляции"
+      ],
+      "answer": 1,
+      "explanation": "io.Copy переписывает из Reader в Buffer три байта строки abc и возвращает количество 3."
+    },
+    {
+      "id": "io-10",
+      "topic": "io",
+      "kind": "code",
+      "question": "Что будет содержаться в buf после Flush?",
+      "code": "var buf bytes.Buffer\nw := bufio.NewWriter(&buf)\n_, _ = w.WriteString(\"Go\")\n_ = w.Flush()\nfmt.Printf(\"%q\", buf.String())",
+      "options": [
+        "\"\"",
+        "\"G\"",
+        "\"Go\"",
+        "\"GoGo\""
+      ],
+      "answer": 2,
+      "explanation": "Запись в bufio.Writer накапливается в буфере, а Flush передаёт \"Go\" в целевой bytes.Buffer."
+    },
+    {
+      "id": "json-01",
+      "topic": "json",
+      "kind": "theory",
+      "question": "Какие поля структуры обычно сериализует encoding/json?",
+      "code": null,
+      "options": [
+        "Все поля, включая неэкспортируемые",
+        "Только экспортируемые поля",
+        "Только поля типа string",
+        "Только поля с тегом json"
+      ],
+      "answer": 1,
+      "explanation": "encoding/json кодирует экспортируемые поля; неэкспортируемые поля игнорируются, даже если у них есть тег."
+    },
+    {
+      "id": "json-02",
+      "topic": "json",
+      "kind": "theory",
+      "question": "Какой эффект у Decoder.DisallowUnknownFields() при декодировании JSON-объекта в структуру?",
+      "code": null,
+      "options": [
+        "Игнорирует все неизвестные поля",
+        "Сообщает об ошибке при неизвестном поле",
+        "Удаляет все поля структуры",
+        "Всегда завершает декодирование успешно"
+      ],
+      "answer": 1,
+      "explanation": "Для декодирования в структуру DisallowUnknownFields делает неизвестные поля JSON ошибкой."
+    },
+    {
+      "id": "json-03",
+      "topic": "json",
+      "kind": "theory",
+      "question": "Что верно при json.Unmarshal объекта без одного из полей структуры?",
+      "code": null,
+      "options": [
+        "Отсутствующее поле всегда вызывает ошибку",
+        "Отсутствующее поле сохраняет прежнее значение в целевой структуре",
+        "Поле всегда становится nil независимо от типа",
+        "Происходит паника"
+      ],
+      "answer": 1,
+      "explanation": "При декодировании отсутствующие поля не изменяются: если структура заранее инициализирована, значение сохраняется."
+    },
+    {
+      "id": "json-04",
+      "topic": "json",
+      "kind": "theory",
+      "question": "Чем различаются Encoder.Encode(v) и json.Marshal(v) в вопросе перевода строки?",
+      "code": null,
+      "options": [
+        "Encode записывает JSON и завершающий перевод строки",
+        "Marshal всегда записывает перевод строки",
+        "Marshal всегда пишет в файл",
+        "Encode никогда не возвращает ошибки"
+      ],
+      "answer": 0,
+      "explanation": "Encoder.Encode добавляет перевод строки после закодированного значения; Marshal возвращает байтовый JSON без обязательного завершающего перевода строки."
+    },
+    {
+      "id": "json-05",
+      "topic": "json",
+      "kind": "theory",
+      "question": "Почему следует валидировать конфигурацию до os.Create файла назначения?",
+      "code": null,
+      "options": [
+        "Чтобы ускорить парсинг JSON",
+        "Чтобы не обрезать существующий файл при ошибке валидации",
+        "Чтобы получить доступ к неэкспортируемым полям",
+        "Чтобы отменить необходимость проверки Close"
+      ],
+      "answer": 1,
+      "explanation": "os.Create усечёт существующий файл. Проверка до открытия для записи предотвращает потерю прежнего содержимого при невалидной конфигурации."
+    },
+    {
+      "id": "json-06",
+      "topic": "json",
+      "kind": "code",
+      "question": "Что будет напечатано?",
+      "code": "type Item struct {\n    Name string\n    age  int\n}\nb, _ := json.Marshal(Item{Name: \"Go\", age: 2})\nfmt.Println(string(b))",
+      "options": [
+        "{\"Name\":\"Go\"}",
+        "{}",
+        "{\"name\":\"Go\"}",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "У экспортируемого Name нет тега, поэтому ключ JSON по умолчанию — Name. Поле age неэкспортируемое и игнорируется."
+    },
+    {
+      "id": "json-07",
+      "topic": "json",
+      "kind": "code",
+      "question": "Какое значение будет выведено?",
+      "code": "type Config struct { Name string `json:\"lang\"` }\nvar c Config\n_ = json.Unmarshal([]byte(`{\"lang\":\"Rust\"}`), &c)\nfmt.Println(c.Name)",
+      "options": [
+        "Go",
+        "Rust",
+        "Пустая строка",
+        "Ошибка декодирования"
+      ],
+      "answer": 1,
+      "explanation": "Тег json:\"lang\" сопоставляет поле Name с ключом lang, поэтому в поле записывается Rust."
+    },
+    {
+      "id": "json-08",
+      "topic": "json",
+      "kind": "code",
+      "question": "Какой результат после декодирования?",
+      "code": "type Config struct { A, B int }\nc := Config{A: 5, B: 9}\n_ = json.Unmarshal([]byte(`{\"B\":3}`), &c)\nfmt.Println(c.A, c.B)",
+      "options": [
+        "0 3",
+        "5 0",
+        "5 3",
+        "Ошибка"
+      ],
+      "answer": 2,
+      "explanation": "JSON задаёт только B=3, поэтому ранее присвоенное A=5 не меняется."
+    },
+    {
+      "id": "json-09",
+      "topic": "json",
+      "kind": "code",
+      "question": "Что будет выведено?",
+      "code": "type Config struct { Port int }\nd := json.NewDecoder(strings.NewReader(`{\"Port\":8080,\"extra\":1}`))\nd.DisallowUnknownFields()\nvar c Config\nerr := d.Decode(&c)\nfmt.Println(err != nil)",
+      "options": [
+        "true",
+        "false",
+        "Панику",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "Строгий Decoder встретит поле extra, которого нет в Config, поэтому Decode вернёт ненулевую ошибку."
+    },
+    {
+      "id": "json-10",
+      "topic": "json",
+      "kind": "code",
+      "question": "Что будет выведено?",
+      "code": "d := json.NewDecoder(strings.NewReader(`{\"x\":1}`))\nvar a map[string]int\n_ = d.Decode(&a)\nerr := d.Decode(&a)\nfmt.Println(errors.Is(err, io.EOF))",
+      "options": [
+        "true",
+        "false",
+        "nil",
+        "Ошибка компиляции"
+      ],
+      "answer": 0,
+      "explanation": "После успешного чтения одного документа второй Decode у завершившегося потока возвращает io.EOF."
+    }
+  ]
+}
